@@ -32,7 +32,7 @@ function joystick(width, height) {
     ctx.fill();
 }
 
-let coord = { x: 0, y: 0 };
+var coord = { x: 0, y: 0 };
 
 function getPosition(event) {
     coord.x = event.clientX - canvas.offsetLeft;
