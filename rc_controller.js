@@ -3,8 +3,8 @@ var canvas, ctx;
 canvas = document.getElementById('canvas');
 ctx = canvas.getContext('2d');
 document.addEventListener('mousemove', Draw);
-document.getElementById("x_coordinate").innerText = 0;
-document.getElementById("y_coordinate").innerText = 0;
+document.getElementById("x_coords").innerText = 0;
+document.getElementById("y_coords").innerText = 0;
 
 var width, height, radius, x_center, y_center;
 width = window.innerWidth;
@@ -56,7 +56,7 @@ function Draw(event) {
 
         getPosition(event);
 
-        document.getElementById("x_coordinate").innerText = Math.round(x - x_center);
-        document.getElementById("y_coordinate").innerText = Math.round(y - y_center);
+        document.getElementById("x_coords").innerText = Math.round(x - x_center);
+        document.getElementById("y_coords").innerText = Math.round(y - y_center);
         send(Math.round(x - x_center), Math.round(y - y_center));
 }
