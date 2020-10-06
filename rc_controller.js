@@ -1,8 +1,8 @@
 //websocket
-var connect = new WebSocket("ws://" + "192.168.43.188:5679"); 
+var connect = new WebSocket("ws://172.31.7.200:5679"); 
 connect.onopen = function() {
   alert('connection established');
-  connect.send('Connect ' + new Date());
+  //connect.send('Connect ' + new Date());
 }
 connect.onerror = function(err){
   alert('websocket error: ', err);
