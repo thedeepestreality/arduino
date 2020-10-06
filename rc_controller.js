@@ -1,3 +1,29 @@
+//websocket
+var connect = new WebSocket("ws://" + "192.168.43.188:5679"); 
+connect.onopen = function() {
+  alert('connection established');
+  connect.send('Connect ' + new Date());
+}
+connect.onerror = function(err){
+  alert('websocket error: ', err);
+}
+connect.onmessage = function(e){
+  alert('server data: ', e.data);
+}
+connect.onclose = function(e) {
+  if(e.wasClean)
+    alert('connection is closed');
+  else
+    alert('connection was interrupted');
+}
+function sendData(x, y){
+  var data = {'x':x, 'y':y};
+  data = JSON.stringify(data);
+  connect.send(data);
+}
+
+
+//joystick
 var canvas, ctx;
 
 canvas = document.getElementById('canvas');
@@ -40,6 +66,7 @@ var start_drawing = false;
 function getPosition(event) {
     coord.x = event.clientX - canvas.offsetLeft;
     coord.y = event.clientY - canvas.offsetTop;
+    //console.log('clientX: ' + clientX + ' coord.x: ' + coord.x);
 }
 
 function startDrawing(event) {
@@ -49,7 +76,7 @@ function startDrawing(event) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       background();
       joystick(coord.x, coord.y);
-      Draw();
+      Draw(event);
   }
 }
 
@@ -82,6 +109,7 @@ function Draw(event) {
 
         document.getElementById("x_coords").innerText = Math.round(x - x_center);
         document.getElementById("y_coords").innerText = Math.round(y - y_center);
-        send(Math.round(x - x_center), Math.round(y - y_center));
+        //console.log(Math.round(x - x_center));
+        sendData(Math.round(x - x_center), Math.round(y - y_center));
       }
 }
