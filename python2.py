@@ -1,16 +1,12 @@
 import socket
 
-
-def bytes_to_int(b: bytes, *, signed: bool = False) -> int:
-    return int.from_bytes(b, byteorder='big', signed=signed)
-
-
 UDP_IP = "127.0.0.1"
 UDP_PORT = 5005
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.bind((UDP_IP, UDP_PORT))
-
 while True:
-    data, addr = sock.recvfrom(1024)
-    print("received message:", bytes_to_int(data, signed=True))
+    x, addr = sock.recvfrom(1024)
+    y, addr = sock.recvfrom(1024)
+    print("x:", int(bytes.decode(x)))
+    print("y:", int(bytes.decode(y)))
